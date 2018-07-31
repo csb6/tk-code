@@ -1,4 +1,5 @@
 class Menu
+    attr_accessor :document
     def initialize(root, document)
         @root = root
         @document = document
@@ -10,6 +11,7 @@ class Menu
             @menuBuilder.createMenu("Selection")
             @menuBuilder.createMenu("View")
             @menuBuilder.createMenu("Go")
+            addHelpMenu
     end
 
     class MenuBuilder
@@ -62,11 +64,16 @@ class Menu
             
             if currentFile != ""
                 file = File.new(currentFile, "w")
-                file.puts(content)
+                file.print(content)
                 file.rewind
                 file.close
                 @document.currentFile = currentFile
             end
         })
+    end
+
+    def addHelpMenu
+        @menuBuilder.createMenu("Help")
+        @menuBuilder.addItem("About", proc { Tk::messageBox :message => 'Tk-Code is a prototype clone of VS Code written in Ruby/Tk. It aims to replicate the cross platform, intuitive-to-use nature of VS Code using far less memory.' })
     end
 end
