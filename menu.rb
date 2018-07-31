@@ -4,26 +4,43 @@ class Menu
         @document = document
         @menuBar = TkMenu.new(@root)
             @root['menu'] = @menuBar
-        addFileMenu
-        @editMenu = addMenu("Edit")
-        @selectionMenu = addMenu("Selection")
-        @viewMenu = addMenu("View")
+        @menuBuilder = MenuBuilder.new(@menuBar)
+            addFileMenu
+            @menuBuilder.createMenu("Edit")
+            @menuBuilder.createMenu("Selection")
+            @menuBuilder.createMenu("View")
+            @menuBuilder.createMenu("Go")
     end
 
-    def addMenu(label)
-        menu = TkMenu.new(@menuBar)
-        @menuBar.add(:cascade, :menu => menu, :label => label)
-        return menu
-    end
+    class MenuBuilder
+        def initialize(menuBar)
+            @menuBar = menuBar
+        end
 
-    def addMenuItem(menu, label, command)
-        menu.add(:command, :label => label, :command => command)
+        def createMenu(label)
+            @menu = TkMenu.new(@menuBar)
+            @menuBar.add(:cascade, :menu => @menu, :label => label)
+        end
+
+        def addItem(label, command)
+            @menu.add(:command, :label => label, :command => command)
+        end
     end
 
     def addFileMenu
-        @fileMenu = addMenu("File")
+        @menuBuilder.createMenu("File")
 
-        addMenuItem(@fileMenu, "Save", proc {
+        @menuBuilder.addItem("Open", proc {
+            currentFile = Tk::getOpenFile
+            
+            if currentFile != ""  #If there's a proper filename, write updated version to file
+                @document.clearText
+                @document.displayFile(currentFile)
+                @document.currentFile = currentFile
+            end
+        })
+
+        @menuBuilder.addItem("Save", proc {
             content = @document.getText
             currentFile = @document.currentFile
             
@@ -39,17 +56,7 @@ class Menu
             end
         })
 
-        addMenuItem(@fileMenu, "Open", proc {
-            currentFile = Tk::getOpenFile
-            
-            if currentFile != ""  #If there's a proper filename, write updated version to file
-                @document.clearText
-                @document.displayFile(currentFile)
-                @document.currentFile = currentFile
-            end
-        })
-
-        addMenuItem(@fileMenu, "Save As", proc {
+        @menuBuilder.addItem("Save As...", proc {
             content = @document.getText
             currentFile = Tk::getSaveFile
             

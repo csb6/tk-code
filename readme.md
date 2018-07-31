@@ -4,7 +4,8 @@ Tk-Code is a prototype clone of VS Code written in Ruby/Tk. It aims to replicate
 
 The aim to to replicate VS Code's abilities to the point where even VS Code extensions can be added and used unaltered. However, this feature is not yet implemented.
 
-Please remember that this is a prototype application. Use with caution; there may be bugs!!!!!!
+Please remember that this is a prototype application. Use with caution; there may be bugs!
+
 
 
 
