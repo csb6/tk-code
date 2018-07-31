@@ -1,4 +1,5 @@
 require 'tk'
+TkOption.add('*tearOff', 0) #Keeps menus from tearing off
 
 root = TkRoot.new do
     title "Code"
