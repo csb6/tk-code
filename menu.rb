@@ -1,8 +1,9 @@
 class Menu
     attr_accessor :document
-    def initialize(root, document)
+    def initialize(root, editor)
         @root = root
-        @document = document
+        @editor = editor
+        @document = @editor.currentDoc
         @menuBar = TkMenu.new(@root)
             @root['menu'] = @menuBar
         @menuBuilder = MenuBuilder.new(@menuBar)
@@ -36,9 +37,9 @@ class Menu
             currentFile = Tk::getOpenFile
             
             if currentFile != ""  #If there's a proper filename, write updated version to file
-                @document.clearText
-                @document.displayFile(currentFile)
+                @editor.createDocument(currentFile)
                 @document.currentFile = currentFile
+                @document.displayCurrentFile
             end
         })
 

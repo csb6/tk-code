@@ -1,4 +1,5 @@
 class Editor
+    attr_reader :currentDoc
 
     def initialize(root)
         @root = root
@@ -10,23 +11,28 @@ class Editor
             grid("row" => 1, "column" => 0)
         end
 
+        @menu = Menu.new(@root, self)
         createDocument("Welcome")
-        createDocument("Document1")
-        @selectedDoc = @openDocs[0]
-        @menu = Menu.new(@root, @selectedDoc)
 
         @notebook.bind("<NotebookTabChanged>") {
             selectedId = @notebook.index(@notebook.selected)
-            @selectedDoc = @openDocs[selectedId]
-            @menu.document = @selectedDoc
+            @currentDoc = @openDocs[selectedId]
+            @menu.document = @currentDoc
         }
     end
 
-    def createDocument(title)
+    def createDocument(title) #TODO: Fix text of documents not remaining when switching tabs
         frame = Tk::Tile::Frame.new(@notebook)
         @notebook.add(frame, :text => title)
+        @notebook.select( @notebook.index(frame) ) #Select frame that just opened
         document = Document.new(frame)
         @openDocs << document
+        changeSelected(document)
+    end
+
+    def changeSelected(document)
+        @currentDoc = document
+        @menu.document = @currentDoc
     end
 
 end

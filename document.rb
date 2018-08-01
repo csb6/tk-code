@@ -28,8 +28,8 @@ class Document
         return @textBox.get("1.0", "end")
     end
 
-    def displayFile(filename)
-        File.open(filename) do |line|
+    def displayCurrentFile
+        File.open(@currentFile) do |line|
             @textBox.insert(1.0, line.read)
         end
     end
