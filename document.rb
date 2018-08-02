@@ -34,5 +34,32 @@ class Document
         end
     end
 
+    def saveCurrentFile
+        content = getText
+        
+        if @currentFile != ""
+            file = File.open(@currentFile, "w+")
+            fcontent = ""
+            file.each do |line|
+                fcontent = fcontent + line
+            end
+            fcontent != content ? file.puts(content) : #Makes sure the program doesn't rewrite the file if it hasn't been edited
+            file.rewind
+            file.close
+        end
+    end
+
+    def saveAsCurrentFile(path)
+        content = getText
+        
+        if @currentFile != ""
+            file = File.new(path, "w")
+            file.print(content)
+            file.rewind
+            file.close
+            @currentFile = path
+        end
+    end
+
 
 end

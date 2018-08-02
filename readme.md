@@ -6,8 +6,11 @@ Eventually, the program will replicate VS Code's abilities to the point where ev
 
 Please remember that this is a prototype application. Use with caution; there may be bugs!!!!
 
-Planned features:
+Current features:
 -Multi-document editing with tabs
+
+Planned features:
 -Code highlighting
 -Support for VS Code extensions
+
 

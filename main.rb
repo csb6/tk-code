@@ -1,6 +1,6 @@
 require 'tk'
 require_relative 'document'
-require_relative 'menu'
+require_relative 'MenuManager'
 require_relative 'editor'
 TkOption.add('*tearOff', 0) #Keeps menus from tearing off
 
@@ -15,7 +15,6 @@ editor = Editor.new(root)
 
     # doc = Document.new(root)
     # text = doc.text
-    # m = Menu.new(root, doc)
 
     # sideBar = TkFrame.new(root) do
     #     grid("row" => 0, "column" => 0)

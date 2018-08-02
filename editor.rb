@@ -11,28 +11,41 @@ class Editor
             grid("row" => 1, "column" => 0)
         end
 
-        @menu = Menu.new(@root, self)
-        createDocument("Welcome")
+        @menuManager = MenuManager.new(@root, self)
+        openTab("/users/kevinblakley/test/ruby/tk-code/welcome.md")
 
         @notebook.bind("<NotebookTabChanged>") {
             selectedId = @notebook.index(@notebook.selected)
-            @currentDoc = @openDocs[selectedId]
-            @menu.document = @currentDoc
+            changeSelected( @openDocs[selectedId] )
         }
     end
 
-    def createDocument(title) #TODO: Fix text of documents not remaining when switching tabs
+    def openTab(path)
         frame = Tk::Tile::Frame.new(@notebook)
-        @notebook.add(frame, :text => title)
+        @notebook.add(frame, :text => path)
+        openDocument(path, frame)
         @notebook.select( @notebook.index(frame) ) #Select frame that just opened
-        document = Document.new(frame)
-        @openDocs << document
-        changeSelected(document)
     end
 
     def changeSelected(document)
         @currentDoc = document
-        @menu.document = @currentDoc
+        @menuManager.document = @currentDoc
+    end
+
+    def openDocument(path, frame)
+        document = Document.new(frame)
+        document.currentFile = path
+        document.displayCurrentFile
+        changeSelected(document) #Tell menuManager which document is selected
+        @openDocs << document
+    end
+
+    def saveSelectedDocument
+        @currentDoc.saveCurrentFile
+    end
+
+    def saveAsSelectedDocument(path)
+        @currentDoc.saveAsCurrentFile(path)
     end
 
 end
