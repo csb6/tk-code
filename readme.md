@@ -12,5 +12,4 @@ Current features:
 Planned features:
 -Code highlighting
 -Support for VS Code extensions
-
-
+-Support for fancy styling/syntax highlighting

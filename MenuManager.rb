@@ -34,21 +34,19 @@ class MenuManager
 
         @menuBuilder.addItem("Open", proc {
             path = Tk::getOpenFile
-            
             if path != ""  #If there's a proper filename, open file in editor
                 @editor.openTab(path)
             end
         })
 
         @menuBuilder.addItem("Save", proc {
-            @editor.saveSelectedDocument
+            @editor.currentDoc.save
         })
 
         @menuBuilder.addItem("Save As...", proc {
             path = Tk::getSaveFile
-            
             if path != ""
-                @editor.saveAsSelectedDocument(path)
+                @editor.currentDoc.saveAs(path)
             end
         })
     end

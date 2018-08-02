@@ -6,3 +6,5 @@ Now featuring...
 -Tabs!
 -Open/Save/Save As menus!
 -...and native widgets!
+-...And a whole lot more to come!
+

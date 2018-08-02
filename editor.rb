@@ -11,12 +11,12 @@ class Editor
             grid("row" => 1, "column" => 0)
         end
 
-        @menuManager = MenuManager.new(@root, self)
         openTab("/users/kevinblakley/test/ruby/tk-code/welcome.md")
+        @menuManager = MenuManager.new(@root, self)
 
         @notebook.bind("<NotebookTabChanged>") {
             selectedId = @notebook.index(@notebook.selected)
-            changeSelected( @openDocs[selectedId] )
+            @currentDoc = @openDocs[selectedId]
         }
     end
 
@@ -27,25 +27,10 @@ class Editor
         @notebook.select( @notebook.index(frame) ) #Select frame that just opened
     end
 
-    def changeSelected(document)
-        @currentDoc = document
-        @menuManager.document = @currentDoc
-    end
-
     def openDocument(path, frame)
-        document = Document.new(frame)
-        document.currentFile = path
-        document.displayCurrentFile
-        changeSelected(document) #Tell menuManager which document is selected
-        @openDocs << document
+        @currentDoc = Document.new(frame)
+        @currentDoc.currentFile = path
+        @currentDoc.display
+        @openDocs << @currentDoc
     end
-
-    def saveSelectedDocument
-        @currentDoc.saveCurrentFile
-    end
-
-    def saveAsSelectedDocument(path)
-        @currentDoc.saveAsCurrentFile(path)
-    end
-
 end

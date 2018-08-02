@@ -28,13 +28,13 @@ class Document
         return @textBox.get("1.0", "end")
     end
 
-    def displayCurrentFile
+    def display
         File.open(@currentFile) do |line|
             @textBox.insert(1.0, line.read)
         end
     end
 
-    def saveCurrentFile
+    def save
         content = getText
         
         if @currentFile != ""
@@ -49,7 +49,7 @@ class Document
         end
     end
 
-    def saveAsCurrentFile(path)
+    def saveAs(path)
         content = getText
         
         if @currentFile != ""
