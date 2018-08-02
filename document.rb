@@ -2,8 +2,9 @@ require 'tk'
 
 class Document
     attr_accessor :text, :currentFile
-    def initialize(root)
+    def initialize(root, editor)
         @root = root
+        @editor = editor
         @currentFile = ""
         @textBox = TkText.new(@root) do
             wrap "word"
@@ -11,6 +12,7 @@ class Document
             height 60
             grid("row" => 1, "column" => 1, "pady" => "5 0")
         end
+        @textBox.font("#{@editor.settings.font} #{@editor.settings.fontSize}")
 
         s = Tk::Tile::Scrollbar.new(@root) do #Scrollbar on left
             orient "vertical"
@@ -35,7 +37,7 @@ class Document
     end
 
     def save
-        content = getText
+        content = getText.chomp
         
         if @currentFile != ""
             file = File.open(@currentFile, "w+")
@@ -43,14 +45,14 @@ class Document
             file.each do |line|
                 fcontent = fcontent + line
             end
-            fcontent != content ? file.puts(content) : #Makes sure the program doesn't rewrite the file if it hasn't been edited
+            fcontent != content ? file.print(content) : #Makes sure the program doesn't rewrite the file if it hasn't been edited
             file.rewind
             file.close
         end
     end
 
     def saveAs(path)
-        content = getText
+        content = getText.chomp
         
         if @currentFile != ""
             file = File.new(path, "w")

@@ -1,11 +1,12 @@
+require_relative 'SettingsManager'
+
 class Editor
-    attr_reader :currentDoc
+    attr_reader :currentDoc, :settings
 
     def initialize(root)
         @root = root
-        @font = 'TkTextFont'
-        @fontSize = '12'
         @openDocs = [ ]
+        @settings = SettingsManager.new
 
         @notebook = Tk::Tile::Notebook.new(root) do
             grid("row" => 1, "column" => 0)
@@ -28,7 +29,7 @@ class Editor
     end
 
     def openDocument(path, frame)
-        @currentDoc = Document.new(frame)
+        @currentDoc = Document.new(frame, self)
         @currentDoc.currentFile = path
         @currentDoc.display
         @openDocs << @currentDoc

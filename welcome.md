@@ -7,4 +7,3 @@ Now featuring...
 -Open/Save/Save As menus!
 -...and native widgets!
 -...And a whole lot more to come!
-

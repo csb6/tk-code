@@ -1,0 +1,9 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "git.autofetch": true,
+    "workbench.statusBar.feedback.visible": false,
+    "python.linting.enabled": false,
+    "extensions.ignoreRecommendations": true,
+    "extensions.showRecommendationsOnlyOnDemand": true,
+}
