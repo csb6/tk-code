@@ -19,6 +19,14 @@ class Editor
             selectedId = @notebook.index(@notebook.selected)
             @currentDoc = @openDocs[selectedId]
         }
+
+        @notebook.bind("2", proc { #Right click to close tab
+            if @openDocs.size > 1
+                id = @notebook.index(@notebook.selected)
+                @notebook.forget(id)
+                @openDocs.delete_at(id)
+            end
+        })
     end
 
     def openTab(path)
