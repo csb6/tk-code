@@ -12,7 +12,7 @@ class Editor
             grid("row" => 1, "column" => 0)
         end
 
-        openTab("/users/kevinblakley/test/ruby/tk-code/welcome.md")
+        openTab("./welcome.md")
         @menuManager = MenuManager.new(@root, self)
 
         @notebook.bind("<NotebookTabChanged>") {
@@ -31,7 +31,7 @@ class Editor
 
     def openTab(path)
         frame = Tk::Tile::Frame.new(@notebook)
-        @notebook.add(frame, :text => path)
+        @notebook.add(frame, :text => path.split("/")[-1] )
         openDocument(path, frame)
         @notebook.select( @notebook.index(frame) ) #Select frame that just opened
     end

@@ -12,7 +12,7 @@ class Document
             height 60
             grid("row" => 1, "column" => 1, "pady" => "5 0")
         end
-        @textBox.font("#{@editor.settings.font} #{@editor.settings.fontSize}")
+        @textBox.font("#{@editor.settings.getSetting("editor.fontFamily")} #{@editor.settings.getSetting("editor.fontSize")}")
 
         s = Tk::Tile::Scrollbar.new(@root) do #Scrollbar on left
             orient "vertical"
