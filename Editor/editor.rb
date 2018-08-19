@@ -1,4 +1,4 @@
-require_relative 'SettingsManager'
+require_relative '../SettingsManager'
 
 class Editor
     attr_reader :currentDoc, :settings
@@ -12,7 +12,7 @@ class Editor
             grid("row" => 1, "column" => 0)
         end
 
-        openTab("./welcome.md")
+        openTab(Constants::WELCOME_PATH)
         @menuManager = MenuManager.new(@root, self)
 
         @notebook.bind("<NotebookTabChanged>") {

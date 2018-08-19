@@ -1,4 +1,4 @@
-require_relative "../SettingsParser"
+require_relative "../util/SettingsParser"
 
-parser = SettingsParser.new("../parsed-default-settings.json")
-parser.parseIntoFile("../default-settings-reduced.json")
+parser = SettingsParser.new("../config/parsed-default-settings.json")
+parser.parseIntoFile("../config/default-settings-reduced.json")

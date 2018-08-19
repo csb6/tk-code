@@ -1,8 +1,8 @@
 require 'tk'
-require_relative 'document'
-require_relative 'MenuManager'
-require_relative 'editor'
-TkOption.add('*tearOff', 0) #Keeps menus from tearing off
+require_relative 'util/Constants'
+require_relative 'editor/Document'
+require_relative 'editor/Editor'
+require_relative 'menu/MenuManager'
 
 root = TkRoot.new do
     title "Code"
