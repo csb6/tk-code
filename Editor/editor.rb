@@ -1,12 +1,10 @@
-require_relative '../SettingsManager'
-
 class Editor
-    attr_reader :currentDoc, :settings
+    attr_reader :currentDoc
 
-    def initialize(root)
+    def initialize(root, settings)
         @root = root
         @openDocs = [ ]
-        @settings = SettingsManager.new
+        @settings = settings
 
         @notebook = Tk::Tile::Notebook.new(root) do
             grid("row" => 0, "column" => 0)
@@ -37,7 +35,7 @@ class Editor
     end
 
     def openDocument(path, frame)
-        @currentDoc = Document.new(frame, self)
+        @currentDoc = Document.new(frame, @settings)
         @currentDoc.currentFile = path
         @currentDoc.display
         @openDocs << @currentDoc

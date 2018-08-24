@@ -2,9 +2,9 @@ require 'tk'
 
 class Document
     attr_accessor :text, :currentFile
-    def initialize(root, editor)
+    def initialize(root, settings)
         @root = root
-        @editor = editor
+        @settings = settings
         @currentFile = ""
         @textBox = TkText.new(@root) do
             wrap "word"
@@ -12,7 +12,7 @@ class Document
             height 25
             grid("row" => 1, "column" => 1, "pady" => "5 0")
         end
-        @textBox.font("#{@editor.settings.getSetting("editor.fontFamily")} #{@editor.settings.getSetting("editor.fontSize")}")
+        @textBox.font("#{@settings.get("editor.fontFamily")} #{@settings.get("editor.fontSize")}")
 
         s = Tk::Tile::Scrollbar.new(@root) do #Scrollbar on left
             orient "vertical"
