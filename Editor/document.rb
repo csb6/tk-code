@@ -9,7 +9,7 @@ class Document
         @textBox = TkText.new(@root) do
             wrap "word"
             width 125
-            height 60
+            height 25
             grid("row" => 1, "column" => 1, "pady" => "5 0")
         end
         @textBox.font("#{@editor.settings.getSetting("editor.fontFamily")} #{@editor.settings.getSetting("editor.fontSize")}")
