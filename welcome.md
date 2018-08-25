@@ -6,5 +6,6 @@ Now featuring...
 -Tabs!
 -Open/Save/Save As menus!
 -And a hackily implemented terminal!
+-And a semi-working scrollbar!
 -...and native widgets!
 -...And a whole lot more to come!
