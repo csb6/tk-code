@@ -14,11 +14,8 @@ class Document
         end
         @textBox.font("#{@settings.get("editor.fontFamily")} #{@settings.get("editor.fontSize")}")
 
-        s = Tk::Tile::Scrollbar.new(@root) do #Scrollbar on left
-            orient "vertical"
-            command proc{|*args| @textBox.yview(*args)}
-            grid('row' => 1, "column" => 0, "sticky" => 'ns', "pady" => "5 0")
-          end
+        s = Tk::Tile::Scrollbar.new(root, orient: "vertical", command: proc{|*args| @textBox.yview(*args)})
+          s.grid('row' => 1, "column" => 0, "sticky" => 'ns', "pady" => "5 0")
           @textBox.yscrollcommand proc{|*args| s.set(*args)}
     end
 
@@ -41,12 +38,7 @@ class Document
         
         if @currentFile != ""
             file = File.open(@currentFile, "w+")
-            fcontent = ""
-            file.each do |line|
-                fcontent = fcontent + line
-            end
-            fcontent != content ? file.print(content) : #Makes sure the program doesn't rewrite the file if it hasn't been edited
-            file.rewind
+            file.print(content)
             file.close
         end
     end
@@ -57,7 +49,6 @@ class Document
         if @currentFile != ""
             file = File.new(path, "w")
             file.print(content)
-            file.rewind
             file.close
             @currentFile = path
         end
