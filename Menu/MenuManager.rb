@@ -1,5 +1,5 @@
 class MenuManager
-
+    include Constants
     def initialize(root, editor)
         @root = root
         @editor = editor
@@ -55,7 +55,7 @@ class MenuManager
     def addHelpMenu
         @menuBuilder.createMenu("Help")
         @menuBuilder.addItem("About", proc { 
-            Tk::messageBox :message => 'Tk-Code is a prototype clone of VS Code written in Ruby/Tk. It aims to replicate the cross platform, intuitive nature of VS Code using far less memory.' 
+            Tk::messageBox :message => MENU_HELP_MSG 
         })
     end
 end

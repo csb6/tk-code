@@ -1,9 +1,10 @@
 class Explorer
+    include Constants
     def initialize(root)
         @root = root
         @tree = Tk::Tile::Treeview.new(@root) do
-            height 28
-            column_configure("#0", "width" => 240)
+            height TREE_HEIGHT
+            column_configure("#0", "width" => TREE_WIDTH)
             grid('row' => 0, "column" => 0, "sticky" => "ne")
         end
         @treeFiles = [ ]
