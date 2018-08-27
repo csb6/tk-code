@@ -23,13 +23,7 @@ class SettingsParser
                 @correctSettings[key] = value
             end
         end
-        writeIntoFile
+        File.write( @parsedSettingPath, JSON.pretty_generate(@correctSettings) )
     end
 
-    def writeIntoFile
-        parsedSettingFile = File.open(@parsedSettingPath, "w")
-        parsedSettings = JSON.pretty_generate(@correctSettings)
-        parsedSettingFile.puts(parsedSettings)
-        parsedSettingFile.close
-    end
 end

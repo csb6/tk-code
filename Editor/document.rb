@@ -38,9 +38,7 @@ class Document
         content = getText.chomp
         
         if @currentFile != ""
-            file = File.open(@currentFile, "w+")
-            file.print(content)
-            file.close
+            File.write(@currentFile, content)
         end
     end
 
@@ -48,9 +46,7 @@ class Document
         content = getText.chomp
         
         if @currentFile != ""
-            file = File.new(path, "w")
-            file.print(content)
-            file.close
+            File.write(path, content)
             @currentFile = path
         end
     end
