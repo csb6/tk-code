@@ -7,7 +7,7 @@ class Editor
         @settings = settings
 
         @notebook = Tk::Tile::Notebook.new(root) do
-            grid("row" => 0, "column" => 0)
+            grid("row" => 0, "column" => 1)
         end
 
         openTab(Constants::WELCOME_PATH)

@@ -31,7 +31,7 @@ class SettingsManager
             "fn" => DEFAULT_FONT,
             "af" => ALTERNATE_FONT,
             "browser" => "xdg-open",
-            "width" => "80",
+            "width" => "118",
             "height" => "15",
             "tn" => "9term",
             "title" => "tt",

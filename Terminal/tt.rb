@@ -35,7 +35,7 @@ class TT
     # }
     @root = Tk::Tile::Paned.new(opts["rootWin"]) do
       # orient "vertical"
-      grid("row" => 1, "column" => 0)
+      grid("row" => 1, "column" => 1)
     end
     # self.title = opts["title"]
     # @root.bind("Map") { @mapped = true; self.title = self.title }

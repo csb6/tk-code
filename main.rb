@@ -3,6 +3,7 @@ require_relative 'config/Themes'
 require_relative 'config/SettingsManager'
 require_relative 'util/Constants'
 require_relative 'terminal/Tt'
+require_relative 'explorer/Explorer'
 require_relative 'editor/Document'
 require_relative 'editor/Editor'
 require_relative 'menu/MenuManager'
@@ -19,5 +20,6 @@ settings = SettingsManager.new(root)
 terminal = TT.new( settings.get("tt") )
 terminal.run
 editor = Editor.new(root, settings)
+explorer = Explorer.new(root)
 
 Tk.mainloop
