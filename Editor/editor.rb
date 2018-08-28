@@ -1,4 +1,5 @@
 class Editor
+    include Constants::Editor
     attr_reader :currentDoc
 
     def initialize(root, settings)
@@ -7,23 +8,23 @@ class Editor
         @settings = settings
 
         @notebook = Tk::Tile::Notebook.new(root) do
-            grid("row" => 0, "column" => 1)
+            grid("row" => ROW, "column" => COLUMN)
         end
 
-        openTab(Constants::WELCOME_PATH)
+        openTab(WELCOME_PATH)
 
         @notebook.bind("<NotebookTabChanged>") {
             selectedId = @notebook.index(@notebook.selected)
             @currentDoc = @openDocs[selectedId]
         }
 
-        @notebook.bind("2", proc { #Right click to close tab
+        @notebook.bind("2") { #Right click to close tab
             if @openDocs.size > 1
                 id = @notebook.index(@notebook.selected)
                 @notebook.forget(id)
                 @openDocs.delete_at(id)
             end
-        })
+        }
     end
 
     def openTab(path)

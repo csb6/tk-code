@@ -1,5 +1,5 @@
 class MenuManager
-    include Constants
+    include Constants::Menu
     def initialize(root, editor)
         @root = root
         @editor = editor

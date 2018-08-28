@@ -1,7 +1,7 @@
 require 'tk'
 
 class Document
-    include Constants
+    include Constants::Document
     attr_accessor :text, :currentFile
     def initialize(root, settings)
         @root = root
@@ -11,12 +11,12 @@ class Document
             wrap "word"
             width DOC_WIDTH
             height DOC_HEIGHT
-            grid("row" => 1, "column" => 1, "pady" => DOC_PADDING)
+            grid("row" => DOC_ROW, "column" => DOC_COL, "pady" => DOC_PADDING)
         end
         @textBox.font("#{@settings.get("editor.fontFamily")} #{@settings.get("editor.fontSize")}")
 
         s = Tk::Tile::Scrollbar.new(root, orient: "vertical", command: proc{|*args| @textBox.yview(*args)})
-          s.grid('row' => 1, "column" => 0, "sticky" => 'ns', "pady" => SCROLL_PADDING)
+          s.grid('row' => SCROLL_ROW, "column" => SCROLL_COL, "sticky" => 'ns', "pady" => SCROLL_PADDING)
           @textBox.yscrollcommand proc{|*args| s.set(*args)}
     end
 

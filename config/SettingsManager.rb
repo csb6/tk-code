@@ -13,7 +13,7 @@ class SettingsManager
     end
 
     def setVSDefaults
-        defaultSettingsFile = File.read(Constants::DEFAULT_SETTING_PATH)
+        defaultSettingsFile = File.read(Constants::Settings::DEFAULT_SETTING_PATH)
         @defaults = JSON.parse(defaultSettingsFile)
         defaultSettingsFile = nil
     end
