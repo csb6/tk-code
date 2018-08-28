@@ -20,6 +20,7 @@ settings = SettingsManager.new(root)
 terminal = TT.new( settings.get("tt") )
 terminal.run
 editor = Editor.new(root, settings)
+menu = MenuManager.new(root, editor)
 explorer = Explorer.new(root, editor)
 
 Tk.mainloop

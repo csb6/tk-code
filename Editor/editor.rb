@@ -11,7 +11,6 @@ class Editor
         end
 
         openTab(Constants::WELCOME_PATH)
-        @menuManager = MenuManager.new(@root, self)
 
         @notebook.bind("<NotebookTabChanged>") {
             selectedId = @notebook.index(@notebook.selected)
