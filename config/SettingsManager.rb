@@ -67,4 +67,5 @@ class SettingsManager
             end
           end
     end
+    
 end

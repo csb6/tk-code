@@ -51,5 +51,4 @@ class Document
         end
     end
 
-
 end
