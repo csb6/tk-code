@@ -10,11 +10,11 @@ class Explorer
         end
         @treeFiles = [ ]
         @path = Dir.getwd
-        buildTree
+        rBuildTree(@path)
 
         @tree.bind("<TreeviewSelect>") {
             @currentNode = @tree.focus_item
-            currentPath = "#{@path}/#{@tree.itemcget(@currentNode, :tags)[0]}"
+            currentPath = "#{@tree.itemcget(@currentNode, :tags)[0]}"
             if !Dir.exists?(currentPath)
                 @tree.tag_bind("#{@tree.itemcget(@currentNode, :tags)[0]}", "Double-1") {
                     @editor.openTab(currentPath)
@@ -23,15 +23,12 @@ class Explorer
         }
     end
 
-    def buildTree
-        Dir.entries(@path).each do |file|
+    def rBuildTree(parentFile="", parentEntry="")
+        Dir.entries(parentFile).each do |file|
             if file[0] != "."
-                treeFile = @tree.insert('', 'end', :text => file, :tags => ["#{file}"])
-                if Dir.exists?(file) #if file is a directory, sublist its contents
-                    Dir.entries(file).each do |f|
-                        if f[0] != "." then subFile = @tree.insert(treeFile, 'end', :text => f, :tags => ["#{file}/#{f}"]) end
-                    end
-                end
+                treeEntry = @tree.insert(parentEntry, 'end', :text => file, :tags => ["#{parentFile}/#{file}"])
+                # puts "#{parentFile}/#{file}"
+                if Dir.exists?(file) then rBuildTree("#{parentFile}/#{file}", treeEntry) end
             end
         end
     end
