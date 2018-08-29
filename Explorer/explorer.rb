@@ -27,8 +27,7 @@ class Explorer
         Dir.entries(parentFile).each do |file|
             if file[0] != "."
                 treeEntry = @tree.insert(parentEntry, 'end', :text => file, :tags => ["#{parentFile}/#{file}"])
-                # puts "#{parentFile}/#{file}"
-                if Dir.exists?(file) then rBuildTree("#{parentFile}/#{file}", treeEntry) end
+                if Dir.exists?("#{parentFile}/#{file}") then rBuildTree("#{parentFile}/#{file}", treeEntry) end
             end
         end
     end
