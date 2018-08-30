@@ -6,6 +6,8 @@ Eventually, the program will replicate VS Code's abilities to the point where ev
 
 I plan to increasingly implement the functionality/interface layout of VS Code in native widgets. It may be uglier, but it fits the look-and-feel of the OS better, while using less memory. But the present version is nowhere close to implementing most of VS Code's broad feature set.
 
+As a rough estimate (hardly scientific), tk-code uses around 80 MB of memory, temporarily jumping to 130 MB when opening new files before garbage collection occurs. With the same files open, the various VS Code processes' combined usage hovers around 360 MB. This is a significant reduction, achieved without any code optimization.
+
 Please remember that this is a prototype application. Use with caution; there may be bugs!
 
 Current features:

@@ -20,7 +20,7 @@ class Document
         end
         @font = "#{@settings.get("editor.fontFamily")} #{@settings.get("editor.fontSize")}"
         @textBox.font(@font)
-        @textBox.tag_configure('lineNumTag', :font => "#{@font} bold")
+        @lineNumTag = TkTextTag.new(@textBox, :font => "#{@font} bold")
         @docTextTag = TkTextTag.new(@textBox)
     end
 
@@ -42,7 +42,7 @@ class Document
         File.open(@currentFile).each do |line|
             lineLabel = sprintf("%-5d", "#{lineNum}")
 
-            @textBox.insert(i, lineLabel, "lineNumTag")
+            @textBox.insert(i, lineLabel, @lineNumTag)
             i += lineLabel.length
             @textBox.insert(i, line, @docTextTag)
             i += line.length
