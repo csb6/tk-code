@@ -7,20 +7,21 @@ class Document
         @root = root
         @settings = settings
         @currentFile = ""
-        @textBox = TkText.new(@root) do
+        @textBox = TkText.new(@root) do |t|
             wrap "word"
             width DOC_WIDTH
             height DOC_HEIGHT
+            TkScrollbar.new(root) { |s|
+                command proc{|*args| t.yview(*args)}
+                t.yscrollcommand proc{|first, last| s.set(first, last)}
+                grid('row' => SCROLL_ROW, "column" => SCROLL_COL, "sticky" => 'ns', "pady" => SCROLL_PADDING)
+            }
             grid("row" => DOC_ROW, "column" => DOC_COL, "pady" => DOC_PADDING)
         end
         @font = "#{@settings.get("editor.fontFamily")} #{@settings.get("editor.fontSize")}"
         @textBox.font(@font)
         @textBox.tag_configure('lineNumTag', :font => "#{@font} bold")
         @docTextTag = TkTextTag.new(@textBox)
-
-        s = Tk::Tile::Scrollbar.new(root, orient: "vertical", command: proc{|*args| @textBox.yview(*args)})
-          s.grid('row' => SCROLL_ROW, "column" => SCROLL_COL, "sticky" => 'ns', "pady" => SCROLL_PADDING)
-          @textBox.yscrollcommand proc{|*args| s.set(*args)}
     end
 
     def clearText
@@ -40,7 +41,7 @@ class Document
         lineNum = 1
         File.open(@currentFile).each do |line|
             lineLabel = sprintf("%-5d", "#{lineNum}")
-            
+
             @textBox.insert(i, lineLabel, "lineNumTag")
             i += lineLabel.length
             @textBox.insert(i, line, @docTextTag)
