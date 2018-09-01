@@ -22,6 +22,14 @@ class Document
         @textBox.font(@font)
         @lineNumTag = TkTextTag.new(@textBox, :font => "#{@font} bold")
         @docTextTag = TkTextTag.new(@textBox)
+
+        @textBox.bind("<Selection>") {
+            @textBox.bind("ButtonRelease-1") { #Remove selection from line numbers
+                @lineNumTag.ranges.each do |range|
+                    @textBox.tag_remove("sel", range[0], range[1])
+                end
+            }
+        }
     end
 
     def clearText
@@ -30,7 +38,7 @@ class Document
     
     def getText
         docText = ""
-        @docTextTag.ranges.each do |range| #Get each range of document text
+        @docTextTag.ranges.each do |range| #Get document text from textbox
             docText << @textBox.get( range[0], range[1] )
         end
         return docText
@@ -57,7 +65,7 @@ class Document
     end
 
     def saveAs(path)
-        if @currentFile != ""
+        if path != ""
             File.write(path, getText.chomp)
             @currentFile = path
         end
