@@ -20,29 +20,6 @@ class Document
         end
         @font = "#{@settings.get("editor.fontFamily")} #{@settings.get("editor.fontSize")}"
         @textBox.font(@font)
-        @lineNumTag = TkTextTag.new(@textBox, :font => "#{@font} bold")
-        @docTextTag = TkTextTag.new(@textBox)
-        @addedLines = Array.new #Stores references to 1st chars of newlines added
-
-        @textBox.bind("<Selection>") {
-            @textBox.bind("ButtonRelease-1") { #Remove selection from line numbers
-                @lineNumTag.ranges.each do |range|
-                    @textBox.tag_remove("sel", range[0], range[1])
-                end
-            }
-        }
-
-        @textBox.bind("KeyRelease-Return") { #Renumber when newline added
-            @textBox.insert( "insert", "     ", @lineNumTag ) #put blank line number at newline
-            @addedLines << @textBox.index("insert") #store 1st character of this newline
-            lineNum = 1
-            @lineNumTag.ranges.each do |range| #Renumber all lines
-                lineLabel = sprintf("%-5d", "#{lineNum}")
-                @textBox.delete(range[0], range[1])
-                @textBox.insert(range[0], lineLabel, @lineNumTag)
-                lineNum += 1
-            end
-        }
     end
 
     def clearText
@@ -50,27 +27,14 @@ class Document
     end
     
     def getText
-        docText = ""
-        @addedLines.each do |lineStart| #Tag the text of all newly created lines
-            @textBox.tag_add(@docTextTag, lineStart, "#{lineStart} lineend")
-        end
-        @docTextTag.ranges.each do |range| #Get document text from textbox
-            docText << @textBox.get( range[0], range[1] )
-        end
-        return docText
+        return @textBox.get("1.0", "end")
     end
 
     def display
         i = 1.0
-        lineNum = 1
         File.open(@currentFile).each do |line|
-            lineLabel = sprintf("%-5d", "#{lineNum}")
-
-            @textBox.insert(i, lineLabel, @lineNumTag)
-            i += lineLabel.length
-            @textBox.insert(i, line, @docTextTag)
-            i += line.length
-            lineNum += 1
+            @textBox.insert(i, line)
+            i += 1
         end
     end
 

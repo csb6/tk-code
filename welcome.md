@@ -4,10 +4,10 @@ Now featuring...
 -Memory usage below 1 GB!
 -Multi-document editing!
 -Tabs!
+-Tabs that you can close!
 -Open/Save/Save As menus!
 -And a hackily implemented terminal!
 -And a semi-working scrollbar!
 -And a tree for the home folder that opens files in-editor!
--And poorly-implemented line numbers!
 -...and native widgets!
 -...And a whole lot more to come!
