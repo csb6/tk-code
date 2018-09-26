@@ -1,4 +1,5 @@
 require 'tk'
+require_relative 'syntaxmanager'
 
 class Document
     include Constants::Document
@@ -7,6 +8,7 @@ class Document
         @root = root
         @settings = settings
         @currentFile = ""
+        @syntaxmanager = SyntaxManager.new
         @textBox = TkText.new(@root) do |t|
             wrap "word"
             width DOC_WIDTH
@@ -35,6 +37,23 @@ class Document
         File.open(@currentFile).each do |line|
             @textBox.insert(i, line)
             i += 1
+        end
+        applyHighlights
+    end
+
+    def applyHighlights
+        @syntaxmanager.loadSyntax(".rb")
+        @syntaxmanager.findSyntax(getText)
+        textToHighlight = @syntaxmanager.findHighlights
+        textToHighlight.each do |color, words|
+            words.each do |word|
+                start_pos = @textBox.search(word, "1.0", "end")
+                if start_pos != "" && color != nil
+                    end_pos = (start_pos.to_f + word.length).to_s
+                    @textBox.tag_configure(color.to_s, 'foreground' => color.to_s)
+                    @textBox.add_tag(color.to_s, start_pos, end_pos)
+                end
+            end
         end
     end
 

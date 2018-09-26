@@ -8,14 +8,14 @@ require 'json'
 #when a new file is opened in the editor.
 
 class SyntaxManager
-    def initialize(filePath)
+    def initialize
         # @textBox = textBox
-        @filePath = filePath
+        # @filePath = filePath
         @syntaxPath = ""
         #Add a better way to do colors; need a lot more of them
         @colors =["blue", "red", "green", "yellow", "brown", "red", "orange", "alice blue", "aquamarine", "beige", "blue violet", "green", "dark green", "red orange"]
         @syntaxRules = Hash.new
-        @extensionFolder = "../extensions"
+        @extensionFolder = "extensions"
         @extensions = Array.new
         loadExtensions
     end
@@ -48,10 +48,10 @@ class SyntaxManager
         end
     end
 
-    def findHighlightedSyntax(text)
+    def findSyntax(text)
         #Goes through given text, finding which patterns match the current language's syntax highlighting rules.
         #It returns the words to highlight and in what color.
-        allMatches = Array.new
+        @syntax = Array.new
         text.split("\n").each do |line|
             @syntaxRules["patterns"].each do |capture|
                 matches = /#{capture["match"]}/.match(line)
@@ -60,27 +60,25 @@ class SyntaxManager
                     matches.delete(nil)
                     matches.delete("")
                     if !matches.empty? 
-                        allMatches << [matches, capture["name"]]
+                        @syntax << [matches, capture["name"]]
                     end
                 end
             end
         end
-        wordsAndColors = findHighlightColors(allMatches)
-        return wordsAndColors
     end
 
-    def findHighlightColors(matches)
+    def findHighlights
         #Assigns colors to groups of matches that have the same capture name in the syntax files
         nameToColorAndWord = Hash.new
         wordsAndColors = Array.new
         j = 0
-        matches.each_index do |i|
-            if nameToColorAndWord[ matches[i][1] ] === nil
-                nameToColorAndWord[ matches[i][1] ] = Array.new
-                nameToColorAndWord[ matches[i][1] ] = [ @colors[i], [ matches[i][0] ] ]
+        @syntax.each_index do |i|
+            if nameToColorAndWord[ @syntax[i][1] ] === nil
+                nameToColorAndWord[ @syntax[i][1] ] = Array.new
+                nameToColorAndWord[ @syntax[i][1] ] = [ @colors[i], @syntax[i][0] ]
                 j += 1
             else
-                nameToColorAndWord[ matches[i][1] ][1] << matches[i][0]
+                nameToColorAndWord[ @syntax[i][1] ][1] << @syntax[i][0]
             end
         end
         nameToColorAndWord.each_value do |v|
@@ -90,6 +88,7 @@ class SyntaxManager
     end
 end
 
-sm = SyntaxManager.new("hello")
-sm.loadSyntax(".rb")
-puts sm.findHighlightedSyntax(File.read("document.rb")).to_s
+# sm = SyntaxManager.new("hello")
+# sm.loadSyntax(".rb")
+# sm.findSyntax(File.read("document.rb"))
+# puts sm.findHighlights.to_s
