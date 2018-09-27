@@ -1,5 +1,7 @@
 require 'json'
 
+#Not sure how best to link this manager to actually highlight right text. This code is no longer being used until
+#I figure out how best to add highlighting into the editor.
 #Every syntax extension is 100% within a folder in the extensions directory, and each folder contains:
 #    -A package.json file, which contains the applicable file extensions and the path to the TextMate syntax file
 #    -A TextMate syntax file (e.g. ruby.tmLanguage.json), which contains grammar rules for highlighting syntax
