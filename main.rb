@@ -1,12 +1,13 @@
 require 'tk'
-require_relative 'config/Themes'
-require_relative 'config/SettingsManager'
-require_relative 'util/Constants'
-require_relative 'terminal/Tt'
-require_relative 'explorer/Explorer'
-require_relative 'editor/Document'
-require_relative 'editor/Editor'
-require_relative 'menu/MenuManager'
+$LOAD_PATH << "./lib"
+#require 'config/Themes'
+require 'SettingsManager'
+require 'Constants'
+require 'terminal/Tt'
+require 'explorer/Explorer'
+require 'editor/Document'
+require 'editor/Editor'
+require 'menu/MenuManager'
 
 root = TkRoot.new do
     title "Code"

@@ -1,5 +1,3 @@
-require 'tk'
-
 class Document
     include Constants::Document
     attr_accessor :text, :currentFile

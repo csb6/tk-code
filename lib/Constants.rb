@@ -12,7 +12,7 @@ module Constants
         COLUMN = 1
     end
     module Constants::Settings
-        DEFAULT_SETTING_PATH = "/users/coleblakley/test/ruby/tk-code/config/parsed-default-settings.json"
+        DEFAULT_SETTING_PATH = "/users/coleblakley/test/ruby/tk-code/data/config/parsed-default-settings.json"
     end
     module Constants::Document
         DOC_WIDTH = 125
