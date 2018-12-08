@@ -6,7 +6,7 @@ class MenuManager
         TkOption.add('*tearOff', 0) #Keeps menus from tearing off
         @menuBar = TkMenu.new(@root)
             @root['menu'] = @menuBar
-        @menuBuilder = MenuBuilder.new(@menuBar)
+        @menuBuilder = MenuBuilder.new(@menuBar, @root)
             addFileMenu
             @menuBuilder.createMenu("Edit")
             @menuBuilder.createMenu("Selection")
@@ -16,8 +16,9 @@ class MenuManager
     end
 
     class MenuBuilder
-        def initialize(menuBar)
+        def initialize(menuBar, root)
             @menuBar = menuBar
+            @root = root
         end
 
         def createMenu(label)
@@ -28,6 +29,7 @@ class MenuManager
         def addItem(label, command)
             @menu.add(:command, :label => label, :command => command)
         end
+
     end
 
     def addFileMenu

@@ -1,5 +1,11 @@
 module Constants
 
+    if RUBY_PLATFORM =~ /darwin/
+        PLATFORM = "mac"
+    else
+        PLATFORM = "win"
+    end
+
     module Constants::Editor
         WELCOME_PATH = "/users/coleblakley/test/ruby/tk-code/welcome.md"
         ROW = 0
@@ -21,6 +27,15 @@ module Constants
     module Constants::Menu
         MENU_HELP_MSG = "Tk-Code is a prototype clone of VS Code written in Ruby/Tk. 
         It aims to replicate the cross platform, intuitive nature of VS Code using far less memory."
+        if PLATFORM == "mac"
+            OPEN_ACCEL = ["Command-o", "Mod2-o"]
+            SAVE_ACCEL = ["Command-s", "Mod2-s"]
+            SAVE_AS_ACCEL = ["Command-Shift-s", "Mod2-Shift-s"]
+        else
+            OPEN_ACCEL = "Control-o"
+            SAVE_ACCEL = "Control-s"
+            SAVE_AS_ACCEL = "Control-Shift-s"
+        end
     end
     module Constants::Explorer
         ROW = 0
