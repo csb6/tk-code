@@ -4,6 +4,7 @@ class SettingsManager
 
     def initialize(root)
         @root = root
+        TkOption.add('*tearOff', 0) #Keeps menus from tearing off
         setVSDefaults
         setTtDefaults
     end

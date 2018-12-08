@@ -14,7 +14,6 @@ Current features:
 -Multi-document editing with tabs
 -In-window 9term-like terminal
 -File tree for working directory with the ability to open files into new tabs
--Line numbers
 
 Planned features:
 -Code highlighting

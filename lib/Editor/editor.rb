@@ -29,7 +29,7 @@ class Editor
 
     def openTab(path)
         frame = Tk::Tile::Frame.new(@notebook)
-        @notebook.add(frame, :text => path.split("/")[-1] )
+        @notebook.add(frame, :text => path.split("/")[-1] ) #Tab title is filename, not whole path
         openDocument(path, frame)
         @notebook.select( @notebook.index(frame) ) #Select frame that just opened
     end

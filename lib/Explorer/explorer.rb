@@ -10,7 +10,7 @@ class Explorer
         end
         @treeFiles = [ ]
         @path = Dir.getwd
-        rBuildTree(@path)
+        buildTree(@path)
 
         @tree.bind("<TreeviewSelect>") {
             @currentNode = @tree.focus_item
@@ -23,11 +23,11 @@ class Explorer
         }
     end
 
-    def rBuildTree(parentFile="", parentEntry="")
+    def buildTree(parentFile="", parentEntry="") #Recursively build tree structure of folder
         Dir.entries(parentFile).each do |file|
             if file[0] != "."
                 treeEntry = @tree.insert(parentEntry, 'end', :text => file, :tags => ["#{parentFile}/#{file}"])
-                if Dir.exists?("#{parentFile}/#{file}") then rBuildTree("#{parentFile}/#{file}", treeEntry) end
+                if Dir.exists?("#{parentFile}/#{file}") then buildTree("#{parentFile}/#{file}", treeEntry) end
             end
         end
     end

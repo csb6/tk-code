@@ -3,7 +3,6 @@ class MenuManager
     def initialize(root, editor)
         @root = root
         @editor = editor
-        TkOption.add('*tearOff', 0) #Keeps menus from tearing off
         @menuBar = TkMenu.new(@root)
             @root['menu'] = @menuBar
         @menuBuilder = MenuBuilder.new(@menuBar, @root)
