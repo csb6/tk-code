@@ -3,7 +3,7 @@ $LOAD_PATH << "./lib"
 #require 'config/Themes'
 require 'SettingsManager'
 require 'Constants'
-require 'terminal/Tt'
+require 'terminal/bash'
 require 'explorer/Explorer'
 require 'editor/Document'
 require 'editor/Editor'
@@ -18,8 +18,8 @@ end
 # Tk::Tile::Style.theme_use("dark")
 
 settings = SettingsManager.new(root)
-terminal = TT.new( settings.get("tt") )
-terminal.run
+terminal = Terminal.new(root)
+terminal.prompt_user
 editor = Editor.new(root, settings)
 menu = MenuManager.new(root, editor)
 explorer = Explorer.new(root, editor)
