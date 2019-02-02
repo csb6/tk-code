@@ -1,5 +1,7 @@
+#Handles state of all tabs, switching which document is shown, which documents
+#are open, and opens/closes documents at user's request.
 class Editor
-    include Constants::Editor
+    include Constants
     attr_reader :currentDoc
 
     def initialize(root, settings)
@@ -8,7 +10,7 @@ class Editor
         @settings = settings
 
         @notebook = Tk::Tile::Notebook.new(root) do
-            grid("row" => ROW, "column" => COLUMN)
+            grid("row" => EDITOR_ROW, "column" => EDITOR_COLUMN)
         end
 
         openTab(WELCOME_PATH)

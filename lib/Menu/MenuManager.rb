@@ -1,5 +1,7 @@
+#Allows organization/creation of system menus and menu items, as well as blocks
+#of code to excute when each menu item is selected.
 class MenuManager
-    include Constants::Menu
+    include Constants
     def initialize(root, editor)
         @root = root
         @editor = editor

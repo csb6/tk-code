@@ -1,6 +1,5 @@
 require 'tk'
 $LOAD_PATH << "./lib"
-#require 'config/Themes'
 require 'SettingsManager'
 require 'Constants'
 require 'terminal/bash'
@@ -15,7 +14,6 @@ root = TkRoot.new do
     minsize(1800, 1000)
     resizable(true, true)
 end
-# Tk::Tile::Style.theme_use("dark")
 
 settings = SettingsManager.new(root)
 terminal = Terminal.new(root)

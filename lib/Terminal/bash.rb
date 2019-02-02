@@ -1,9 +1,12 @@
+#Creates a simple interactive terminal emulator in a textbox. Doesn't support curses
+#or taking user input, but can change directories, print out text outputs of programs.
 class Terminal
+  include Constants
   def initialize(root)
     @widget = TkText.new(root) do
-      width Constants::Document::DOC_WIDTH + 40
-      height Constants::Document::DOC_HEIGHT - 5
-      grid('row' => 1, 'column' => 1)
+      width DOC_WIDTH + 40
+      height DOC_HEIGHT - 5
+      grid('row' => TERM_ROW, 'column' => TERM_COLUMN)
     end
     @current_line = 1
     @current_dir = Dir.getwd
@@ -58,6 +61,7 @@ class Terminal
 
   def run_command(command)
     process_command(command)
+    #Handle unknown commands by user, which raise exception
     begin
       puts @current_dir
       output = Dir.chdir(@current_dir) do

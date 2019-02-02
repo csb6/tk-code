@@ -1,12 +1,15 @@
+#Recursively builds a list of directories and files in the working directory
+#(the tk-code folder where main.rb is) and displayes them in a sidebar with
+#folding items.
 class Explorer
-    include Constants::Explorer
+    include Constants
     def initialize(root, editor)
         @root = root
         @editor = editor
         @tree = Tk::Tile::Treeview.new(@root) do
-            height HEIGHT
-            column_configure("#0", "width" => WIDTH)
-            grid('row' => ROW, "column" => COLUMN, "sticky" => "ne")
+            height EXPLORER_HEIGHT
+            column_configure("#0", "width" => EXPLORER_WIDTH)
+            grid('row' => EXPLORER_ROW, "column" => EXPLORER_COLUMN, "sticky" => "ne")
         end
         @treeFiles = [ ]
         @path = Dir.getwd

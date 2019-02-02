@@ -1,5 +1,7 @@
+#Each tab in the editor holds a textbox, whose state is managed by a Document instance.
+#Has ability to save/load the text in it, clear itself, and set font and font size.
 class Document
-    include Constants::Document
+    include Constants
     attr_accessor :text, :currentFile
     def initialize(root, settings)
         @root = root
