@@ -1,5 +1,7 @@
 TK-CODE EDITOR
 
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/7E6L7qqxqCs/0.jpg)](http://www.youtube.com/watch?v=7E6L7qqxqCs "Video Title")
+
 Tk-Code is a prototype clone of VS Code written in Ruby/Tk. It aims to replicate the cross platform, intuitive nature of VS Code using far less memory. Tk is a UI toolkit that creates cross-platform applications with native-like widgets, resulting in a more efficient use of system resources than an application running essentially a web browser.
 
 I've started work implementing support for VS Code add-ons, so eventually they can be used for this application without modification.
