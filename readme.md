@@ -7,7 +7,7 @@ Demonstration Video:
 Tk-Code is a fairly basic editor built using Ruby and the Tk widget toolkit. It is designed to resemble the basic interface of VS Code. The goal of this project was to increase my skills in modeling and managing GUIs using classes and a simple architecture. Along the way, I learned a lot about encapsulating the state of different widgets (e.g. using a Document class for reading/writing/saving an opened document), as well as parsing user input in a simple terminal emulator.
 
 ## Usage:
-- Open/Save/Save As files in the File menu work as expected
+- Open/Save/Save As in the File menu work as expected
 - Click on tabs to switch between opened documents
 - Right click on the row of tabs at the top-center of the screen to close the current document
 - The left sidebar contains a tree view of the current working directory (the repository folder) and all its sub-directories
