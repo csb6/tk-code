@@ -1,23 +1,20 @@
-TK-CODE EDITOR
+# Tk-Code Text Editor
+
+Demonstration Video:
 
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/7E6L7qqxqCs/0.jpg)](http://www.youtube.com/watch?v=7E6L7qqxqCs "Video Title")
 
-Tk-Code is a prototype clone of VS Code written in Ruby/Tk. It aims to replicate the cross platform, intuitive nature of VS Code using far less memory. Tk is a UI toolkit that creates cross-platform applications with native-like widgets, resulting in a more efficient use of system resources than an application running essentially a web browser.
+Tk-Code is a fairly basic editor built using Ruby and the Tk widget toolkit. It is designed to resemble the basic interface of VS Code. The goal of this project was to increase my skills in modeling and managing GUIs using classes and a simple architecture. Along the way, I learned a lot about encapsulating the state of different widgets (e.g. using a Document class for reading/writing/saving an opened document), as well as parsing user input in a simple terminal emulator.
 
-I've started work implementing support for VS Code add-ons, so eventually they can be used for this application without modification.
+## Usage:
+- Open/Save/Save As files in the File menu work as expected
+- Click on tabs to switch between opened documents
+- Right click on the row of tabs at the top-center of the screen to close the current document
+- The left sidebar contains a tree view of the current working directory (the repository folder) and all its sub-directories
+- Double-click on any file in the tree to open it in a new tab of the editor
+- The lower white box is an extremely basic terminal emulator. Only commands with simple printed output (like ls or cat) work (no ncurses support or anything), but it does support changing the current directory using cd
 
-I plan to increasingly implement the functionality/interface layout of VS Code in native widgets. It may be uglier, but it fits the appearance of the OS better, while using less memory. But the present version is nowhere close to implementing VS Code's massive feature set.
-
-As a rough estimate (hardly scientific), tk-code uses around 80 MB of memory, temporarily jumping to 130 MB when opening new files before garbage collection occurs. With the same files open, the various VS Code processes' combined usage hovers around 360 MB. This is a significant reduction, achieved without any code optimization.
-
-Please remember that this is a prototype application. Use with caution; there may be bugs!
-
-Current features:
--Multi-document editing with tabs
--Simple, in-window terminal
--File tree for working directory with the ability to open files into new tabs
-
-Planned features:
--Code highlighting
--Support for VS Code extensions
--Support for fancy styling/syntax highlighting
+## Features:
+- Multi-document editing with tabs
+- Simple, in-window terminal
+- File tree for working directory with the ability to open files into new tabs
